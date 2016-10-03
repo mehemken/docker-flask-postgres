@@ -7,4 +7,4 @@ WORKDIR /home/app/
 
 EXPOSE 5000
 
-ENTRYPOINT ["python", "app.py"]
+ENTRYPOINT ["python3", "app.py"]
