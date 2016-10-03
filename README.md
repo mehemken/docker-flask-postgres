@@ -12,4 +12,4 @@ fig up --build -d   #Run the container
 fig down   #Stop and remove everything
 ```
 
-Wash rinse repeat.
+Wash rinse repeat. Add all the bells and whistles you want.
