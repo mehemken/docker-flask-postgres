@@ -4,3 +4,12 @@ services:
     build: .
     ports:
       - "42424:5000"
+    volumes:
+      - ./app:/home/app/
+    depends_on:
+      - database
+  database:
+    image: postgres:9
+    env_file: .env
+    expose:
+      - 5432

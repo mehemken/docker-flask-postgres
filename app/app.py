@@ -1,11 +1,84 @@
-# Basic flask container
+import time
+from flask import Flask, render_template, flash, redirect, request, url_for
+from flask_sqlalchemy import SQLAlchemy
 
-from flask import Flask
+
+DBHOST = 'database'
+DBPORT = '5432'
+DBNAME = 'testdb'
+DBUSER = 'marco'
+DBPASS = 'foobarbaz'
+
+
 app = Flask(__name__)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
+app.config['SQLALCHEMY_DATABASE_URI'] = \
+    'postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{db}' \
+    .format(user=DBUSER,
+        passwd=DBPASS,
+        host=DBHOST,
+        port=DBPORT,
+        db=DBNAME)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'foobarbaz'
 
-@app.route('/')
+
+db = SQLAlchemy(app)
+class students(db.Model):
+    id = db.Column('student_id', db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    city = db.Column(db.String(50))
+    addr = db.Column(db.String(200))
+    pin = db.Column(db.String(10))
+
+    def __init__(self, name, city, addr, pin):
+        self.name = name
+        self.city = city
+        self.addr = addr
+        self.pin = pin
+
+
+def database_initialization_sequence():
+    db.create_all()
+
+    test_rec = students(
+            'Marco Hemken',
+            'Los Angeles',
+            '123 Foobar Ave',
+            '12345')
+
+    db.session.add(test_rec)
+    db.session.commit()
+
+
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    return 'hello planet, and jupiter'
+    if request.method == 'POST':
+        if not request.form['name'] or not request.form['city'] or not request.form['addr']:
+            flash('Please enter all the fields', 'error')
+        else:
+            student = students(
+                    request.form['name'],
+                    request.form['city'],
+                    request.form['addr'],
+                    request.form['pin'])
+
+            db.session.add(student)
+            db.session.commit()
+            flash('Record was succesfully added')
+            return redirect(url_for('home'))
+    return render_template('show_all.html', students=students.query.all())
+
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    dbstatus = False
+    while dbstatus == False:
+        try:
+            db.create_all()
+        except:
+            time.sleep(2)
+        else:
+            dbstatus = True
+    database_initialization_sequence()
+    app.run(debug=True, host='0.0.0.0')
+
