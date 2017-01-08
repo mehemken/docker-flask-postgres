@@ -1,4 +1,6 @@
-# clean-flask-container
+# docker-flask-postgres
+
+This is a simple demo for how to connect to a Postgres database from a python flask application. To run this on your computer you must first install [docker](https://docs.docker.com/engine/installation/).
 
 Fork this and add your app to the `app/` directory. To use this, just add your app and then use the docker-compose file. Here is a simple way of doing this.
 
