@@ -17,9 +17,12 @@ alias fig="docker-compose"
 
 fig up --build -d   #Run the container
 
-#Check it out, edit your code, talk about it
-
 fig down   #Stop and remove everything
+
+# Add your code to the /app/ directory
+# At the moment, you have to do a fig up/down after each change.
+# However, I'll be adding support for a dev setting
+# where all you'll need is to refresh the page in your browser.
 ```
 
 Wash rinse repeat. Add all the bells and whistles you want.
