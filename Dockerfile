@@ -1,6 +1,6 @@
 # Basic flask container
 
-FROM flask-crud-base:1
+FROM fanoftal2/flask-crud-base:1
 
 ADD ./app /home/app/
 WORKDIR /home/app/

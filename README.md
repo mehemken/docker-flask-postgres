@@ -6,8 +6,11 @@ This is a simple demo for how to connect to a Postgres database from a python fl
 
 First do a ```git clone```.
 
-    :::bash
     git clone https://github.com/mehemken/docker-flask-postgres
+
+Then make sure you have docker [installed](https://docs.docker.com/engine/installation/). I also recommend [docker-compose](https://docs.docker.com/compose/install/) to make life easier, but it comes with docker engine for Windows and Mac.
+
+Once you have all of that, you should be good. No need to install [Postgres](https://www.postgresql.org/) or even Python.
 
 ```
 alias fig="docker-compose"
