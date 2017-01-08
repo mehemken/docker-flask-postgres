@@ -25,5 +25,4 @@ fig down   #Stop and remove everything
 # where all you'll need is to refresh the page in your browser.
 ```
 
-Wash rinse repeat. Add all the bells and whistles you want.
-
+The site will be available to you at `localhost:43434`.
