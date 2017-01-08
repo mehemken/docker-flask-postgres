@@ -3,7 +3,7 @@ services:
   flaskapp:
     build: .
     ports:
-      - "42424:5000"
+      - "43434:5000"
     volumes:
       - ./app:/home/app/
     depends_on:

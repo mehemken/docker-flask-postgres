@@ -3,18 +3,18 @@ from flask import Flask, render_template, flash, redirect, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 
+DBUSER = 'marco'
+DBPASS = 'foobarbaz'
 DBHOST = 'database'
 DBPORT = '5432'
 DBNAME = 'testdb'
-DBUSER = 'marco'
-DBPASS = 'foobarbaz'
 
 
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
 app.config['SQLALCHEMY_DATABASE_URI'] = \
-    'postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{db}' \
-    .format(user=DBUSER,
+    'postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{db}'.format(
+        user=DBUSER,
         passwd=DBPASS,
         host=DBHOST,
         port=DBPORT,
@@ -24,30 +24,30 @@ app.secret_key = 'foobarbaz'
 
 
 db = SQLAlchemy(app)
+
+
 class students(db.Model):
     id = db.Column('student_id', db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     city = db.Column(db.String(50))
     addr = db.Column(db.String(200))
-    pin = db.Column(db.String(10))
 
     def __init__(self, name, city, addr, pin):
         self.name = name
         self.city = city
         self.addr = addr
-        self.pin = pin
 
 
 def database_initialization_sequence():
     db.create_all()
-
     test_rec = students(
-            'Marco Hemken',
+            'John Doe',
             'Los Angeles',
             '123 Foobar Ave',
-            '12345')
+            '123')
 
     db.session.add(test_rec)
+    db.session.rollback()
     db.session.commit()
 
 
