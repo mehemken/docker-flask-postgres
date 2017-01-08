@@ -32,7 +32,7 @@ class students(db.Model):
     city = db.Column(db.String(50))
     addr = db.Column(db.String(200))
 
-    def __init__(self, name, city, addr, pin):
+    def __init__(self, name, city, addr):
         self.name = name
         self.city = city
         self.addr = addr
@@ -43,8 +43,7 @@ def database_initialization_sequence():
     test_rec = students(
             'John Doe',
             'Los Angeles',
-            '123 Foobar Ave',
-            '123')
+            '123 Foobar Ave')
 
     db.session.add(test_rec)
     db.session.rollback()
@@ -60,8 +59,7 @@ def home():
             student = students(
                     request.form['name'],
                     request.form['city'],
-                    request.form['addr'],
-                    request.form['pin'])
+                    request.form['addr'])
 
             db.session.add(student)
             db.session.commit()
