@@ -28,3 +28,7 @@ fig down   #Stop and remove everything
 The site will be available to you at `localhost:43434`.
 
 Questions, contact me at my gmail (user: mehemken) or at the LearnTeachCode.slack channel (user: @mehemken).
+
+## One year later
+
+So this got forked. I'm surprised but I'm glad someone found it useful. Then I got nervous thinking "uh oh, does this actually work?". I just follwed the above instructions and I'm happy to report that, yes. It does still work. :)
