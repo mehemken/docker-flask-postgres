@@ -1,15 +1,15 @@
-version: '2'
+version: "3"
 services:
-  flaskapp:
+  web:
     build: .
     ports:
-      - "43434:5000"
+      - "5000:5000"
     volumes:
-      - ./app:/home/app/
+      - ./app/:/home/app/
     depends_on:
-      - database
-  database:
-    image: postgres:9
+      - db
+  db:
+    image: postgres:10
     env_file: .env
     expose:
       - 5432
