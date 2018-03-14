@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 DBUSER = 'marco'
 DBPASS = 'foobarbaz'
-DBHOST = 'database'
+DBHOST = 'db'
 DBPORT = '5432'
 DBNAME = 'testdb'
 
@@ -79,4 +79,3 @@ if __name__ == '__main__':
             dbstatus = True
     database_initialization_sequence()
     app.run(debug=True, host='0.0.0.0')
-
