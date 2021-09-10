@@ -9,12 +9,16 @@
 
 
 	<form action="{{ request.path }}" method="post">
-	    Name:<br>
+	     id:<br>
+	    <input type="text" name="id"><br>
+	    name:<br>
 	    <input type="text" name="name"><br>
-	    City:<br>
-	    <input type="text" name="city"><br>
-	    Address:<br>
-	    <input type="text" name="addr"><br>
+	    symbol:<br>
+	    <input type="text" name="symbol"><br>
+	    platforms:<br>
+	    <input type="text" name="platforms"><br>
+	    contract:<br>
+	    <input type="text" name="contract"><br>
 	    <input type="submit" value="Submit">
 	</form>
 
@@ -22,18 +26,22 @@
 	<table>
 	    <thead>
 		<tr>
-		    <th>Name</th>
-		    <th>City</th>
-		    <th>Address</th>
+		    <th>id</th>
+		    <th>name</th>
+                    <th>symbol</th>
+		    <th>platforms</th>
+		    <th>contract</th>
 		</tr>
 	    </thead>
 
 	    <tbody>
-	    {% for student in students %}
+	    {% for ap in students %}
 		<tr>
-		    <td>{{ student.name }}</td>
-		    <td>{{ student.city }}</td>
-		    <td>{{ student.addr }}</td>
+		    <td>{{ ap.id }}</td>
+		    <td>{{ ap.name }}</td>
+		    <td>{{ ap.symbol }}</td>
+		    <td>{{ ap.platforms }}</td>
+		    <td>{{ ap.contract }}</td>
 		</tr>
 	    {% endfor %}
 	    </tbody>

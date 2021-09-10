@@ -27,22 +27,28 @@ db = SQLAlchemy(app)
 
 
 class students(db.Model):
-    id = db.Column('student_id', db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    city = db.Column(db.String(50))
-    addr = db.Column(db.String(200))
-
-    def __init__(self, name, city, addr):
+    apiid = db.Column('api_id', db.Integer, primary_key=True )
+    id = db.Column(db.String(255))
+    name = db.Column(db.String(255))
+    symbol = db.Column(db.String(255))
+    platforms = db.Column(db.String(255))
+    contract = db.Column(db.String(255))
+    
+    def __init__(self,id, name,symbol, platforms,contract):
+        self.id = id
         self.name = name
-        self.city = city
-        self.addr = addr
+        self.symbol = symbol
+        self.platforms = platforms
+        self.contract = contract
 
 
 def database_initialization_sequence():
     db.create_all()
     test_rec = students(
-            'John Doe',
+              'John Doe',
             'Los Angeles',
+            'btc',
+            '123 Foobar Ave',
             '123 Foobar Ave')
 
     db.session.add(test_rec)
@@ -53,14 +59,15 @@ def database_initialization_sequence():
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
-        if not request.form['name'] or not request.form['city'] or not request.form['addr']:
+        if not request.form['name'] or not request.form['id'] or not request.form['symbol']:
             flash('Please enter all the fields', 'error')
         else:
             student = students(
-                    request.form['name'],
-                    request.form['city'],
-                    request.form['addr'])
-
+                      request.form['id'],
+                      request.form['name'],
+                      request.form['symbol'],
+                      request.form['platforms'],
+                      request.form['contract'])
             db.session.add(student)
             db.session.commit()
             flash('Record was succesfully added')
